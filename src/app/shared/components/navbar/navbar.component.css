@@ -1,0 +1,58 @@
+.navbar {
+  padding: 1rem;
+  background-color: #1c1f29; /* Azul oscuro para el fondo de la barra de navegación */
+}
+
+.btn-outline-primary {
+  color: #4b6e9f; /* Color del texto del botón de contorno con un azul cósmico */
+  border-color: #4b6e9f; /* Color del borde del botón */
+}
+
+.navbar .nav-link {
+  color: #ffffff !important; /* Color blanco para los enlaces en la barra de navegación */
+}
+
+.navbar .navbar-brand {
+  color: #ffffff !important; /* Color blanco para el texto del logo */
+}
+
+.btn-outline-primary:hover {
+  color: #ffffff;
+  background-color: #4b6e9f;
+  border-color: #4b6e9f;
+}
+
+.btn-primary {
+  background-color: #2a3d59; /* Fondo azul oscuro para el botón "Iniciar Sesión" */
+  border: none; /* Sin borde para un diseño limpio */
+}
+
+.btn-primary:hover {
+  background-color: #4b6e9f; /* Fondo del botón al pasar el cursor */
+}
+
+.navbar-toggler {
+  border-color: #4b6e9f; /* Azul cósmico para el borde del botón de menú */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%234b6e9f' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-toggler:hover {
+  box-shadow: 0 0 5px #4b6e9f; /* Sombra azul cósmica al pasar el cursor sobre el botón */
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  outline: none; /* Elimina el borde de enfoque por defecto */
+  box-shadow: 0 0 5px #4b6e9f; /* Mantiene la sombra azul cósmica al hacer clic */
+}
+
+/* Espaciado entre botones en modo responsive */
+@media (max-width: 992px) {
+  /* Ajusta el tamaño según el punto de ruptura de tu diseño */
+  .navbar-nav .nav-item {
+    margin-bottom: 10px; /* Agrega espacio entre los elementos del menú en responsive */
+  }
+}
