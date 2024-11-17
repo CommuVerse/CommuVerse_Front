@@ -1,24 +1,13 @@
-import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
-import { authInverseGuard } from './core/guards/auth-inverse.guard';
 
-export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'auth/login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'auth',
-    loadChildren: () =>
-      import('./pages/auth/auth.routes').then((a) => a.authroutes),
-    canActivate: [authInverseGuard],
-  },
+import { Route } from '@angular/router';
+import { CreateArticleComponent } from './pages/creator/article/article.component';
+import { ExitoComponent } from './pages/exito/exito.component';
 
-  {
-    path: 'reader',
-    loadChildren: () =>
-      import('./pages/reader/reader.routes').then((r) => r.readerroutes),
-    canActivate: [authGuard],
-  },
+export const routes: Route[] = [
+  { path: '', redirectTo: '/creator/crear-articulo', pathMatch: 'full' },
+  { path: 'creator/crear-articulo', component: CreateArticleComponent },
+  { path: 'ruta-de-exito', component: ExitoComponent }, // Ruta para "ruta-de-exito"
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirección por defecto
+  { path: '**', redirectTo: '/home' } // Ruta comodín para errores 404
+
 ];
