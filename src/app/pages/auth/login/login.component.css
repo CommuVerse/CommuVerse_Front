@@ -8,7 +8,13 @@
   background-color: #121d2b; /* Fondo oscuro para el contenedor principal */
   padding-bottom: 1rem; /* Espacio adicional antes del footer */
 }
-
+ /* Estilo para el texto de bienvenida */
+ .welcome-text {
+  color: white; /* Color blanco */
+  font-size: 2rem; /* Tamaño más pequeño */
+  text-align: center; /* Centrar el texto */
+  margin-top: 1rem; /* Un pequeño margen desde arriba */
+}
 /* Imagen del logo */
 .image-container {
   width: 100%; /* Asegura que ocupe todo el ancho */

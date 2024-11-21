@@ -3,6 +3,7 @@ export interface Article {
     type: string;
     title: string;
     content: string;
+    author: string;
     publicationDate?: string;
     status?: boolean;
     numReads?: number;
