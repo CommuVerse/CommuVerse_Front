@@ -8,7 +8,7 @@ import { Article } from '../../shared/models/article';
 })
 export class ArticleService {
   private apiUrl = 'http://localhost:8080/api/v1/articles'; // URL base del backend
-  private token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJQaWVycmUxMiIsImlhdCI6MTczMjE5NjY1MiwiZXhwIjoxNzMyMjMyNjUyfQ.2MsFPLFls7wwik_oxpUEG0THdPik4QCZtTOehDODHIkRsknZ8rukl8LbraXaMQywXQLt447vTBXKvPSRd8ikUg';
+  private token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJQaWVycmUxMiIsImlhdCI6MTczMjM4MDE2OSwiZXhwIjoxNzMyNDE2MTY5fQ.LmPRZyMympjjcAZCD4b3Kp2BpORiKjGjj8w0kEcEQDK4HKqRx0BUn5At0T9Nfb2dvYQY5-sCovqPy3XfiIgUYg';
 
   constructor(private http: HttpClient) {}
 
@@ -43,5 +43,18 @@ export class ArticleService {
     });
 
     return this.http.get<Article[]>(`${this.apiUrl}/seeArticle`, { headers });
+  }
+
+  /**
+   * Método para obtener un artículo por su ID.
+   * @param id ID del artículo.
+   * @returns Observable con los detalles del artículo.
+   */
+  getArticle(id: number): Observable<Article> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+    });
+
+    return this.http.get<Article>(`${this.apiUrl}/${id}`, { headers });
   }
 }

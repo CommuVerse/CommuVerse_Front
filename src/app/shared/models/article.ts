@@ -1,4 +1,5 @@
 export interface Article {
+images: any;
     id?: number;
     type: string;
     title: string;
@@ -9,6 +10,7 @@ export interface Article {
     numReads?: number;
     numComments?: number;
     numLikes?: number;
+    imageUrl?:string;
     scheduledDate?: string;
     creatorId: number;
 }

@@ -75,6 +75,23 @@
         </select>
       </div>
 
+      <!-- Sección de Imágenes -->
+      <div class="form-group">
+        <label>Imágenes</label>
+        <div class="image-grid">
+          <div *ngFor="let image of images; let i = index" class="image-preview">
+            <img [src]="image" alt="Imagen del artículo" />
+            <button type="button" (click)="removeImage(i)" class="remove-image">
+              ✖
+            </button>
+          </div>
+          <div class="add-image" (click)="triggerImageUpload()">
+            <span>+</span>
+          </div>
+        </div>
+        <input type="file" #imageInput hidden (change)="onImageSelected($event)" accept="image/*" multiple />
+      </div>
+
       <button type="submit" class="submit-button">Publicar Artículo</button>
     </form>
   </div>
