@@ -1,0 +1,90 @@
+<div class="min-h-screen">
+  <div class="form-container">
+    <h1>Crear Nuevo Artículo</h1>
+    <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-group">
+        <label for="title">Título</label>
+        <input id="title" formControlName="title" placeholder="Ingrese el título del artículo" />
+      </div>
+
+      <div class="form-group">
+        <label for="content">Contenido</label>
+        <textarea id="content" formControlName="content" placeholder="Escriba el contenido del artículo aquí"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Categoría</label>
+        <select id="category" formControlName="category">
+          <option value="tecnologia">Tecnología</option>
+              <option value="ciencia">Ciencia</option>
+              <option value="deportes">Deportes</option>
+              <option value="cultura">Cultura</option>
+              <option value="educacion">Educación</option>
+              <option value="salud">Salud</option>
+              <option value="arte">Arte</option>
+              <option value="literatura">Literatura</option>
+              <option value="historia">Historia</option>
+              <option value="viajes">Viajes</option>
+              <option value="negocios">Negocios</option>
+              <option value="finanzas">Finanzas</option>
+              <option value="politica">Política</option>
+              <option value="medio-ambiente">Medio Ambiente</option>
+              <option value="musica">Música</option>
+              <option value="cine">Cine</option>
+              <option value="gastronomia">Gastronomía</option>
+              <option value="moda">Moda</option>
+              <option value="psicologia">Psicología</option>
+              <option value="religion">Religión</option>
+              <option value="filosofia">Filosofía</option>
+              <option value="fotografia">Fotografía</option>
+              <option value="automoviles">Automóviles</option>
+              <option value="videojuegos">Videojuegos</option>
+              <option value="programacion">Programación</option>
+              <option value="robotica">Robótica</option>
+              <option value="inteligencia-artificial">Inteligencia Artificial</option>
+              <option value="astronomia">Astronomía</option>
+              <option value="biologia">Biología</option>
+              <option value="fisica">Física</option>
+              <option value="quimica">Química</option>
+              <option value="matematicas">Matemáticas</option>
+              <option value="emprendimiento">Emprendimiento</option>
+              <option value="economia">Economía</option>
+              <option value="derecho">Derecho</option>
+              <option value="marketing">Marketing</option>
+              <option value="redes-sociales">Redes Sociales</option>
+              <option value="fotografia">Fotografía</option>
+              <option value="animales">Animales</option>
+              <option value="jardineria">Jardinería</option>
+              <option value="hogar">Hogar</option>
+              <option value="familia">Familia</option>
+              <option value="infantil">Infantil</option>
+              <option value="educacion">Educación</option>
+              <option value="teatro">Teatro</option>
+              <option value="danzas">Danzas</option>
+              <option value="comic">Cómic</option>
+              <option value="poesia">Poesía</option>
+              <option value="aventura">Aventura</option>
+              <option value="fotografia">Fotografía</option>
+              <option value="esoterismo">Esoterismo</option>
+              <option value="misterio">Misterio</option>
+              <option value="humor">Humor</option>
+              <option value="autos">Autos</option>
+              <option value="tecnologia-movil">Tecnología Móvil</option>
+              <option value="blockchain">Blockchain</option>
+              <option value="fintech">FinTech</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-button">Publicar Artículo</button>
+    </form>
+  </div>
+
+  <div class="modal" *ngIf="showSuccessModal">
+    <div class="modal-content">
+      <h2>¡Artículo Creado con Éxito!</h2>
+      <p>El artículo se ha publicado correctamente.</p>
+      <button class="return-button" (click)="redirectToHome()">Volver al Inicio</button>
+    </div>
+  </div>
+  
+</div>

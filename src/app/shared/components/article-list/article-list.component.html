@@ -1,0 +1,32 @@
+<div class="article-list">
+  <h1>Artículos Destacados</h1>
+  <div *ngIf="articles.length > 0; else noArticles" class="articles-grid">
+    <div *ngFor="let article of articles" class="article-card">
+      <div class="article-image">
+        <!-- Imagen o placeholder -->
+        <img src="app/assets/playa.jpeg" alt="Imagen del artículo" />
+      </div>
+      <div class="article-content">
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.content }}</p>
+        <small>Por {{ article.author }} - {{ article.publicationDate }}</small>
+      </div>
+      <div class="article-footer">
+        <div class="article-icons">
+          <span class="icon">
+            <img src="assets/me-gusta-1.png" alt="Me Gusta" />
+            <span>{{ article.numLikes }}</span>
+          </span>
+          <span class="icon">
+            <img src="assets/icons/comment.svg" alt="Comentario" />
+            <span>{{ article.numComments }}</span>
+          </span>
+        </div>
+        <a href="#" class="share-link">Compartir</a>
+      </div>
+    </div>
+  </div>
+  <ng-template #noArticles>
+    <p>No hay artículos disponibles.</p>
+  </ng-template>
+</div>
