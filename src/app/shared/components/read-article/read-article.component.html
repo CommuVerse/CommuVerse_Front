@@ -1,0 +1,73 @@
+<div class="article-view">
+  <!-- Tarjeta del artículo -->
+  <div class="card">
+    <!-- Encabezado -->
+    <div class="card-header">
+      <div class="image-container">
+        <img
+        *ngIf="article?.images && article?.images.length > 0"
+        [src]="article?.images[0]"
+        alt="Imagen del artículo"
+        class="w-full h-64 object-cover rounded-md"
+      />
+      <img
+        *ngIf="!article?.images || article?.images.length === 0"
+        src="assets/default-image.png"
+        alt="Imagen predeterminada"
+        class="w-full h-64 object-cover rounded-md"
+      />
+        <div class="title-overlay">
+          <p>{{ article?.type }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div class="card-content">
+      <h1>{{ article?.title }}</h1>
+      <div class="article-meta">
+        <div class="author-info">
+          <img src="assets/avatar-placeholder.svg" alt="Autor" />
+          <div>
+            <p>Por {{ article?.author }}</p>
+            <p>Publicado el {{ article?.publicationDate }}</p>
+          </div>
+        </div>
+        <div class="actions">
+          <button (click)="onLike()">❤ {{ likes }}</button>
+          <button>🔗</button>
+          <button>⭐</button>
+
+          <div *ngIf="isCreator" class="dropdown">
+            <button class="dropdown-toggle" (click)="toggleMenu()">⋮</button>
+            <div class="dropdown-menu" *ngIf="menuVisible">
+              <button (click)="editArticle()">Editar</button>
+              <button (click)="deleteArticle()">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p>{{ article?.content }}</p>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="comments-section">
+      <h2>Comentarios</h2>
+      <textarea
+        [(ngModel)]="comment"
+        placeholder="Escribe aquí tu comentario..."
+      ></textarea>
+      <button (click)="onComment()">Comentar</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <p>© 2024 CommuVerse. Todos los derechos reservados.</p>
+      <div class="social-icons">
+        <button><img src="assets/twitter.svg" alt="Twitter" /></button>
+        <button><img src="assets/instagram.svg" alt="Instagram" /></button>
+        <button><img src="assets/facebook.svg" alt="Facebook" /></button>
+      </div>
+    </div>
+  </div>
+</div>

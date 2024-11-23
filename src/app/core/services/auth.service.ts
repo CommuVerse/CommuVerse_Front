@@ -12,6 +12,9 @@ import { RegisterResponse } from '../../shared/models/register-response.models';
   providedIn: 'root',
 })
 export class AuthService {
+  isCreator(): boolean {
+    throw new Error('Method not implemented.');
+  }
   private baseURL = `${environment.baseURL}/auth`;
   private http = inject(HttpClient);
   private storageService = inject(StorageService);

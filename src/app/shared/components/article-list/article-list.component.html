@@ -1,0 +1,71 @@
+<div class="article-list">
+  <div class="header">
+    <h1 class="title">Artículos Destacados</h1>
+  <!-- Botón de filtrar -->
+  <div class="filter-container">
+    <button class="filter-button" (click)="toggleFilterMenu()">
+      <img src="src/app/Assets/filtrar.png" alt="Filtrar" class="filter-icon" />
+    </button>
+    <div class="filter-menu" *ngIf="showFilterMenu">
+      <label>
+        Categoría:
+        <select (change)="onFilterChange($event)">
+          <option value="">Todas</option>
+          <option value="tecnologia">Tecnología</option>
+          <option value="deportes">Deportes</option>
+          <option value="cultura">Cultura</option>
+          <option value="ciencia">Ciencia</option>
+        </select>
+      </label>
+    </div>
+  </div>
+</div>
+<div *ngIf="articles.length > 0; else noArticles" class="articles-grid">
+    <!-- Iterar sobre los artículos -->
+    <div *ngFor="let article of articles" class="article-card">
+      <!-- Imagen del artículo -->
+      <div class="article-image">
+        <img
+          *ngIf="article.images && article.images.length > 0"
+          [src]="article.images[0]"
+          alt="Imagen del artículo"
+          class="w-full h-32 object-cover rounded-md"
+        />
+        <img
+          *ngIf="!article.images || article.images.length === 0"
+          src="assets/default-image.png"
+          alt="Imagen predeterminada"
+          class="w-full h-32 object-cover rounded-md"
+        />
+      </div>
+
+      <!-- Contenido del artículo -->
+      <div class="article-content">
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.content }}</p>
+        <small>Por {{ article.author }} - {{ article.publicationDate }}</small>
+      </div>
+
+      <!-- Footer del artículo -->
+      <div class="article-footer">
+        <div class="article-icons">
+          <span class="icon">
+            <img src="assets/me-gusta-1.png" alt="Me Gusta" />
+            <span>{{ article.numLikes }}</span>
+          </span>
+          <span class="icon">
+            <img src="assets/icons/comment.svg" alt="Comentario" />
+            <span>{{ article.numComments }}</span>
+          </span>
+        </div>
+        <!-- Enlace para leer más -->
+        <a [routerLink]="['/article', article.id]" class="share-link">Leer más</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plantilla alternativa si no hay artículos -->
+  <ng-template #noArticles>
+    <p>No hay artículos disponibles.</p>
+  </ng-template>
+</div>
