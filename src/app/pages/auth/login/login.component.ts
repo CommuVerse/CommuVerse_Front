@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-
 import {
   FormBuilder,
   FormGroup,
@@ -9,11 +8,14 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { AuthRequest } from '../../../shared/models/auth-request.model';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -21,13 +23,15 @@ import { AuthRequest } from '../../../shared/models/auth-request.model';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
     MatCardModule,
     MatSnackBarModule,
-    MatButtonModule,
+    CommonModule,
     RouterLink,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -39,17 +43,24 @@ export class LoginComponent {
 
   constructor() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      nickName: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  controlHasError(control: string, error: string) {
+  /**
+   * Verifica si un control del formulario tiene un error específico.
+   */
+  controlHasError(control: string, error: string): boolean {
     return this.loginForm.controls[control].hasError(error);
   }
 
+  /**
+   * Maneja el envío del formulario de login.
+   */
   onSubmit() {
     if (this.loginForm.invalid) {
+      this.showSnackBar('Por favor, completa todos los campos correctamente.');
       return;
     }
 
@@ -57,20 +68,24 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe({
       next: () => {
-        this.showSnackBar('Inicio de Sesión Existoso');
-        this.router.navigate(['/reader']);
+        this.showSnackBar('Inicio de sesión exitoso');
+        // Redirige a la interfaz de creación de artículos
+        this.router.navigate(['/creator/crear-articulo']);
       },
       error: () => {
         this.showSnackBar(
-          'Error en el inicio de sesión. Por favor, intenta de nuevo.'
+          'Error en el inicio de sesión. Por favor, verifica tus credenciales.'
         );
       },
     });
   }
 
+  /**
+   * Muestra un mensaje con MatSnackBar.
+   */
   private showSnackBar(message: string): void {
-    this.snackBar.open('Login Successful', 'Close', {
-      duration: 2000,
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000,
       verticalPosition: 'top',
     });
   }

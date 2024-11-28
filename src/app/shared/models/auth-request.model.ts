@@ -1,4 +1,4 @@
 export interface AuthRequest {
-  email: string;
-  password: string;
+  nickName: string; // Nickname del usuario
+  password: string; // Contraseña del usuario
 }

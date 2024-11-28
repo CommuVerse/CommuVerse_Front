@@ -1,54 +1,73 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 import { StorageService } from './storage.service';
 import { AuthRequest } from '../../shared/models/auth-request.model';
-import { Observable, tap } from 'rxjs';
 import { AuthResponse } from '../../shared/models/auth-response.model';
-import { RegisterRequest } from '../../shared/models/register-request.model';
-import { RegisterResponse } from '../../shared/models/register-response.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  isCreator(): boolean {
-    throw new Error('Method not implemented.');
-  }
-  private baseURL = `${environment.baseURL}/auth`;
+  private baseURL = `${environment.baseURL}/users`; // Ruta base del backend
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
 
   constructor() {}
 
+  /**
+   * Envía las credenciales del usuario para autenticación.
+   * Guarda el token, el id del creador, y el nickname en `StorageService`.
+   */
   login(authRequest: AuthRequest): Observable<AuthResponse> {
-    return this.http
-      .post<AuthResponse>(`${this.baseURL}/login`, authRequest)
-      .pipe(tap((response) => this.storageService.setAuthData(response)));
-  }
-
-  register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(
-      `${this.baseURL}/register/reader`,
-      registerRequest
+    return this.http.post<AuthResponse>(`${this.baseURL}/login`, authRequest).pipe(
+      tap((response) => {
+        // Guarda los datos de autenticación en almacenamiento local
+        this.storageService.setAuthData({
+          token: response.token,
+          id: response.id,  // Guarda el id del creador
+          nickName: response.nickName,
+        });
+      })
     );
   }
 
+  /**
+   * Cierra sesión y limpia los datos almacenados.
+   */
   logout(): void {
     this.storageService.clearAuthData();
   }
 
+  /**
+   * Verifica si el usuario está autenticado.
+   */
   isAuthenticated(): boolean {
     return this.storageService.getAuthData() !== null;
   }
 
-  getUser(): AuthResponse | null {
-    const authData = this.storageService.getAuthData();
-    return authData ? authData : null;
+  /**
+   * Obtiene el ID del creador autenticado.
+   * @returns ID del creador o null si no está autenticado.
+   */
+  getCreatorId(): number | null {
+    return this.storageService.getCreatorId();
   }
 
-  getUserRole(): string | null {
-    const user = this.getUser();
-    return user ? user.role : null;
+  /**
+   * Obtiene el token de autenticación almacenado.
+   * @returns Token JWT o null si no está autenticado.
+   */
+  getToken(): string | null {
+    return this.storageService.getToken();
+  }
+
+  /**
+   * Obtiene el nickname del creador autenticado.
+   * @returns Nickname del creador o null si no está autenticado.
+   */
+  getCreatorNickName(): string | null {
+    return this.storageService.getCreatorNickName();
   }
 }

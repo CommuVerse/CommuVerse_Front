@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+/*import { Component, inject } from '@angular/core';
 
 import {
   FormBuilder,
@@ -70,4 +70,4 @@ export class RegisterComponent {
       duration: 3000,
     });
   }
-}
+} */

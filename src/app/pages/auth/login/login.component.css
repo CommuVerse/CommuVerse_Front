@@ -8,13 +8,15 @@
   background-color: #121d2b; /* Fondo oscuro para el contenedor principal */
   padding-bottom: 1rem; /* Espacio adicional antes del footer */
 }
- /* Estilo para el texto de bienvenida */
- .welcome-text {
+
+/* Estilo para el texto de bienvenida */
+.welcome-text {
   color: white; /* Color blanco */
   font-size: 2rem; /* Tamaño más pequeño */
   text-align: center; /* Centrar el texto */
   margin-top: 1rem; /* Un pequeño margen desde arriba */
 }
+
 /* Imagen del logo */
 .image-container {
   width: 100%; /* Asegura que ocupe todo el ancho */
@@ -55,21 +57,49 @@
 }
 
 .form-input {
+  color: #ffffff;
   width: 100%;
 }
-
 .mat-form-field {
   width: 100%;
+  background-color: white; /* Fondo blanco para los campos de entrada */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px; /* Espacio interno alrededor del campo */
+  margin-bottom: 1rem; /* Añadir espacio entre los campos */
 }
 
+.mat-form-field .mat-label {
+  color: #121d2b; /* Color oscuro para las etiquetas */
+}
+
+/* Estilo para las etiquetas */
 .mat-label {
-  color: #b0bec5; /* Gris claro para las etiquetas */
+  color: #ffffff; /* Color oscuro para las etiquetas */
+}
+
+
+.mat-input-element {
+  color: #121d2b; /* Color del texto en el campo */
+}
+/* Estilo para los textos de los campos */
+input.mat-input-element, textarea.mat-input-element {
+  background-color: white !important; /* Fondo blanco para los inputs */
+  border: 1px solid #121d2b; /* Borde oscuro para el input */
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: white; /* Color del texto en blanco */
 }
 
 /* Placeholder de los inputs */
 ::placeholder {
-  color: #b0bec5;
+  color: #121d2b; /* Color oscuro para los placeholders */
   font-style: italic;
+}
+
+/* Estilo para los errores (si los hay) */
+.mat-error {
+  color: red; /* Color rojo para los errores */
 }
 
 /* Botón de Iniciar Sesión */
@@ -108,6 +138,7 @@
   text-decoration: underline;
 }
 
+/* Estilo para la imagen del logo */
 .image-container img {
   width: 50px; /* Establece el ancho */
   height: 50px; /* Establece la altura */

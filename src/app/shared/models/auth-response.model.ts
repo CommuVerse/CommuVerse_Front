@@ -1,6 +1,5 @@
 export interface AuthResponse {
-  id: number;
-  token: string;
-  name: string;
-  role: string;
+  token: string;    // Token JWT generado por el backend
+  nickName: string; // Nickname del usuario autenticado
+  id:number;
 }

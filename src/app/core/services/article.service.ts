@@ -1,16 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Article } from '../../shared/models/article';
+import { StorageService } from '../../core/services/storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleService {
   private apiUrl = 'http://localhost:8080/api/v1/articles'; // URL base del backend
-  private token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJQaWVycmUxMiIsImlhdCI6MTczMjM4MDE2OSwiZXhwIjoxNzMyNDE2MTY5fQ.LmPRZyMympjjcAZCD4b3Kp2BpORiKjGjj8w0kEcEQDK4HKqRx0BUn5At0T9Nfb2dvYQY5-sCovqPy3XfiIgUYg';
+  private http = inject(HttpClient);
+  private storageService = inject(StorageService);
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   /**
    * Método para crear un artículo.
@@ -18,19 +20,31 @@ export class ArticleService {
    * @returns Observable con la respuesta del servidor.
    */
   createArticle(articleData: Article): Observable<any> {
+    const token = this.storageService.getToken(); // Obtiene el token del usuario autenticado
+    const creatorId = this.storageService.getCreatorId(); // Obtiene el ID del creador autenticado
+
+    if (!creatorId || !token) {
+      throw new Error('No se encontró el token o el ID del creador.');
+    }
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.token}`, // Token manual
+      Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
     });
 
-    // Asignar valores predeterminados si no están definidos
-    articleData.type = articleData.type || 'defaultType';
-    articleData.status = articleData.status !== undefined ? articleData.status : true;
-    articleData.numReads = articleData.numReads || 0;
-    articleData.numComments = articleData.numComments || 0;
-    articleData.numLikes = articleData.numLikes || 0;
+    // Agregar el `creatorId` al cuerpo de la solicitud
+    const articlePayload = {
+      ...articleData,
+      creatorId: creatorId, // Agrega el ID del creador automáticamente
+      type: articleData.type || 'defaultType', // Valores predeterminados
+      status: articleData.status !== undefined ? articleData.status : true,
+      numReads: articleData.numReads || 0,
+      numComments: articleData.numComments || 0,
+      numLikes: articleData.numLikes || 0,
+    };
 
-    return this.http.post(`${this.apiUrl}/create`, articleData, { headers });
+    // Enviar la solicitud al backend
+    return this.http.post(`${this.apiUrl}/create`, articlePayload, { headers });
   }
 
   /**
@@ -38,8 +52,14 @@ export class ArticleService {
    * @returns Observable con la lista de artículos.
    */
   getAllArticles(): Observable<Article[]> {
+    const token = this.storageService.getToken(); // Obtiene el token del usuario autenticado
+
+    if (!token) {
+      throw new Error('No se encontró el token.');
+    }
+
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`, // Token manual
+      Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
     });
 
     return this.http.get<Article[]>(`${this.apiUrl}/seeArticle`, { headers });
@@ -51,8 +71,14 @@ export class ArticleService {
    * @returns Observable con los detalles del artículo.
    */
   getArticle(id: number): Observable<Article> {
+    const token = this.storageService.getToken(); // Obtiene el token del usuario autenticado
+
+    if (!token) {
+      throw new Error('No se encontró el token.');
+    }
+
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`,
+      Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
     });
 
     return this.http.get<Article>(`${this.apiUrl}/${id}`, { headers });
