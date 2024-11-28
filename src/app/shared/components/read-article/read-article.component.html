@@ -5,17 +5,17 @@
     <div class="card-header">
       <div class="image-container">
         <img
-        *ngIf="article?.images && article?.images.length > 0"
-        [src]="article?.images[0]"
-        alt="Imagen del artículo"
-        class="w-full h-64 object-cover rounded-md"
-      />
-      <img
-        *ngIf="!article?.images || article?.images.length === 0"
-        src="assets/default-image.png"
-        alt="Imagen predeterminada"
-        class="w-full h-64 object-cover rounded-md"
-      />
+          *ngIf="article?.images && article?.images.length > 0"
+          [src]="article?.images[0]"
+          alt="Imagen del artículo"
+          class="w-full h-64 object-cover rounded-md"
+        />
+        <img
+          *ngIf="!article?.images || article?.images.length === 0"
+          src="assets/default-image.png"
+          alt="Imagen predeterminada"
+          class="w-full h-64 object-cover rounded-md"
+        />
         <div class="title-overlay">
           <p>{{ article?.type }}</p>
         </div>
@@ -52,14 +52,36 @@
 
     <!-- Comentarios -->
     <div class="comments-section">
-      <h2>Comentarios</h2>
-      <textarea
-        [(ngModel)]="comment"
-        placeholder="Escribe aquí tu comentario..."
-      ></textarea>
-      <button (click)="onComment()">Comentar</button>
-    </div>
+      <h3>Comentarios</h3>
 
+      <!-- Mostrar los comentarios -->
+      <div *ngFor="let comment of comments" class="comment">
+        <div class="comment-header">
+          <div>
+            <span class="comment-author">{{ comment.author }}</span>
+            <span class="comment-timestamp">{{ comment.timestamp | date: 'short' }}</span>
+          </div>
+        </div>
+        <p class="comment-content" [innerHTML]="renderContentWithMentions(comment.content)"></p>
+
+        <div class="comment-actions">
+          <button (click)="editComment(comment)">Editar</button>
+          <button (click)="deleteComment(comment)">Eliminar</button>
+        </div>
+      </div>
+
+      <!-- Formulario para agregar un comentario -->
+      <div class="comment-input-container">
+        <input
+          type="text"
+          [(ngModel)]="commentContent"
+          placeholder="Escribe un comentario..."
+          class="comment-input"
+        />
+        <button (click)="onComment()" class="submit-button">Comentar</button>
+      </div>
+    </div>
+    
     <!-- Footer -->
     <div class="card-footer">
       <p>© 2024 CommuVerse. Todos los derechos reservados.</p>
@@ -71,3 +93,4 @@
     </div>
   </div>
 </div>
+

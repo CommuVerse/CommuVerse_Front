@@ -8,7 +8,7 @@ import { Article } from '../../shared/models/article';
 })
 export class ArticleService {
   private apiUrl = 'http://localhost:8080/api/v1/articles'; // URL base del backend
-  private token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJQaWVycmUxMiIsImlhdCI6MTczMjM4MDE2OSwiZXhwIjoxNzMyNDE2MTY5fQ.LmPRZyMympjjcAZCD4b3Kp2BpORiKjGjj8w0kEcEQDK4HKqRx0BUn5At0T9Nfb2dvYQY5-sCovqPy3XfiIgUYg';
+  private token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEb24gTWVzc2kiLCJpYXQiOjE3MzI3NjMxNzUsImV4cCI6MTczMjc5OTE3NX0.HET0qOTuWcCH4ASd4u90fJroWHs_PrXqWNXWTwP9ZuK9cBHkzPgWYGtcYwDtFZReemIU__zU1qsJkg2EaelHgg';
 
   constructor(private http: HttpClient) {}
 
