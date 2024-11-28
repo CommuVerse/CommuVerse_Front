@@ -1,5 +1,7 @@
+
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 import { Article } from '../../shared/models/article';
 import { StorageService } from '../../core/services/storage.service';
@@ -9,8 +11,10 @@ import { StorageService } from '../../core/services/storage.service';
 })
 export class ArticleService {
   private apiUrl = 'http://localhost:8080/api/v1/articles'; // URL base del backend
+
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
+
 
   constructor() {}
 
@@ -82,5 +86,18 @@ export class ArticleService {
     });
 
     return this.http.get<Article>(`${this.apiUrl}/${id}`, { headers });
+  }
+  /**
+   * Método para filtrar artículos por tipo (categoría).
+   * @param type Tipo (categoría) de los artículos.
+   * @returns Observable con la lista de artículos filtrados por tipo.
+   */
+  filterArticlesByType(type: string): Observable<Article[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`, // Token manual
+    });
+    const params = new HttpParams().set('type', type);
+
+    return this.http.get<Article[]>(`${this.apiUrl}/filter/type`, { headers, params });
   }
 }

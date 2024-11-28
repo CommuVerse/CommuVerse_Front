@@ -1,0 +1,139 @@
+/* Centrado del contenedor principal */
+.min-h-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E4DBF0;
+  padding: 1.5rem;
+}
+
+/* Contenedor del formulario */
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el encabezado */
+.form-container h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #250368;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilos para los grupos de formulario */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #250368;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #4A148C;
+  box-shadow: 0 0 0 2px rgba(74, 20, 140, 0.2);
+}
+
+/* Estilo para el área de texto */
+.form-group textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+/* Botón de enviar */
+.submit-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #250368;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #4A148C;
+}
+
+.submit-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 20, 140, 0.4);
+}
+
+/* Estilos para el modal (si es necesario) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  width: 300px;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #250368;
+}
+
+.modal-content p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.return-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #250368;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.return-button:hover {
+  background-color: #4A148C;
+}
+

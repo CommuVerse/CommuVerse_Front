@@ -1,7 +1,7 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../../core/services/article.service';
 import { Article } from '../../models/article';
-import { CommonModule, NgIfContext } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -14,30 +14,48 @@ import { RouterModule } from '@angular/router';
 export class ArticleListComponent implements OnInit {
   articles: Article[] = [];
   showFilterMenu = false;
+  selectedCategory: string = '';  // Almacenar la categoría seleccionada
 
   constructor(private articleService: ArticleService) {}
 
   ngOnInit(): void {
-    this.loadArticles();
+    this.loadArticles();  // Cargar artículos al iniciar
   }
 
+  // Método para cargar los artículos
   loadArticles(): void {
-    this.articleService.getAllArticles().subscribe({
-      next: (data) => {
-        this.articles = data;
-      },
-      error: (err) => {
-        console.error('Error loading articles:', err);
-      },
-    });
+    if (this.selectedCategory) {
+      // Si se ha seleccionado una categoría, obtener los artículos filtrados
+      this.articleService.filterArticlesByType(this.selectedCategory).subscribe({
+        next: (data: Article[]) => {
+          this.articles = data;
+        },
+        error: (err: any) => {
+          console.error('Error al cargar artículos filtrados:', err);
+        },
+      });
+    } else {
+      // Si no hay categoría seleccionada, cargar todos los artículos
+      this.articleService.getAllArticles().subscribe({
+        next: (data: Article[]) => {
+          this.articles = data;
+        },
+        error: (err: any) => {
+          console.error('Error al cargar artículos:', err);
+        },
+      });
+    }
   }
 
+  // Método para alternar la visibilidad del menú de filtro
   toggleFilterMenu(): void {
     this.showFilterMenu = !this.showFilterMenu;
   }
 
-  onFilterChange(event: Event) {
+  // Método para manejar el cambio de categoría
+  onFilterChange(event: Event): void {
     const selectedCategory = (event.target as HTMLSelectElement).value;
-    console.log('Categoría seleccionada:', selectedCategory);
+    this.selectedCategory = selectedCategory;  // Actualizar la categoría seleccionada
+    this.loadArticles();  // Recargar los artículos con el filtro aplicado
   }
 }

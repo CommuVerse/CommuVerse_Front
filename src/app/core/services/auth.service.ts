@@ -10,7 +10,9 @@ import { AuthResponse } from '../../shared/models/auth-response.model';
   providedIn: 'root',
 })
 export class AuthService {
+
   private baseURL = `${environment.baseURL}/users`; // Ruta base del backend
+
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
 
@@ -69,5 +71,10 @@ export class AuthService {
    */
   getCreatorNickName(): string | null {
     return this.storageService.getCreatorNickName();
+  }
+
+  getUserId(): number | null {
+    const user = this.getUser();
+    return user ? user.id : null;
   }
 }
