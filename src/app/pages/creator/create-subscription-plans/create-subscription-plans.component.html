@@ -1,0 +1,46 @@
+<div class="min-h-screen">
+  <div class="form-container">
+    <h1>Crear Nuevo Plan de Suscripción</h1>
+    <form [formGroup]="createPlanForm" (ngSubmit)="onSubmit()" class="form">
+
+      <!-- Nombre del Plan -->
+      <div class="form-group">
+        <label for="name">Nombre del Plan</label>
+        <input id="name" formControlName="name" placeholder="Ingrese el nombre del plan" />
+      </div>
+
+      <!-- Descripción -->
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea id="description" formControlName="description" placeholder="Ingrese una descripción del plan aquí"></textarea>
+      </div>
+
+      <!-- Precio -->
+      <div class="form-group">
+        <label for="price">Precio</label>
+        <input id="price" formControlName="price" type="number" placeholder="Ingrese el precio del plan" />
+      </div>
+
+      <!-- Duración (en días) -->
+      <div class="form-group">
+        <label for="duration_days">Duración (en días)</label>
+        <input id="duration_days" formControlName="duration_days" type="number" placeholder="Ingrese la duración en días" />
+      </div>
+
+      <!-- Nivel de suscripción -->
+      <div class="form-group">
+        <label for="level">Nivel de Suscripción</label>
+        <select id="level" formControlName="level">
+          <option value="" disabled>Seleccionar nivel</option>
+          <option value="BASIC">BASIC</option>
+          <option value="PREMIUM">PREMIUM</option>
+          <option value="VIP">VIP</option>
+        </select>
+      </div>
+
+      <!-- Botón de Enviar -->
+      <button type="submit" class="submit-button" [disabled]="createPlanForm.invalid">Crear Plan de Suscripción</button>
+    </form>
+  </div>
+
+  <!-- Modal de éxito (si se muestra) -->

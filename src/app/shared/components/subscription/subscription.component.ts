@@ -1,7 +1,7 @@
 import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {DecimalPipe, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {ShowPlan} from '../../models/show-plan.model';
+import {ShowPlan} from '../../models/subscription-plans';
 
 @Component({
   selector: 'app-subscription',
