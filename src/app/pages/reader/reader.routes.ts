@@ -9,6 +9,8 @@ import {SearcherComponent} from './searcher/searcher.component';
 import {SubscriptionsComponent} from './subscriptions/subscriptions.component';
 //import {SubscriptionComponent} from '../../shared/components/subscription/subscription.component';
 //import {ShowPlansComponent} from '../../shared/components/show-plans/show-plans.component';
+import { ReadArticleComponent } from '../../shared/components/read-article/read-article.component';
+
 
 export const readerroutes: Routes = [
   {
@@ -23,7 +25,8 @@ export const readerroutes: Routes = [
       { path: 'subscriptions', component: SubscriptionsComponent },
     //  { path: 'subscription', component: ShowPlansComponent },
       //{ path: 'subscription/checkout', component: PurchasesComponent },
-      { path: 'search', component: SearcherComponent }
+      { path: 'search', component: SearcherComponent },
+      { path: 'article/id', component: ReadArticleComponent}
     ],
   },
 ];

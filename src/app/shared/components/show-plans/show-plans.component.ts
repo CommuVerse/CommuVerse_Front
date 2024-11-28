@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
-import {ShowPlan} from '../../models/show-plan.model';
-import {ShowPlanService} from '../../../core/services/show-plan.service';
+import {ShowPlan} from '../../models/subscription-plans';
+import {ShowPlanService} from '../../../core/services/subscription-plans.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {SubscriptionComponent} from '../subscription/subscription.component';

@@ -12,7 +12,10 @@ import { RegisterResponse } from '../../shared/models/register-response.models';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseURL = `${environment.baseURL}/auth`;
+  isCreator(): boolean {
+    throw new Error('Method not implemented.');
+  }
+  private baseURL = `${environment.baseURL}/users`;
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
 
@@ -47,5 +50,10 @@ export class AuthService {
   getUserRole(): string | null {
     const user = this.getUser();
     return user ? user.role : null;
+  }
+
+  getUserId(): number | null {
+    const user = this.getUser();
+    return user ? user.id : null;
   }
 }
